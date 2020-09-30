@@ -33,10 +33,7 @@ try:
     connection.commit()
     print("Table created successfully in PostgreSQL ")
 
-   postgres_insert_query = """ INSERT INTO houses(
-       ID, LONGITUDE, LATITUDE, HOUSING_MEDIAN_AGE,
-       TOTAL_ROOMS,TOTAL_BEDROOMS,POPULATION,HOUSEHOLDS,MEDIAN_INCOME,
-        MEDIAN_HOUSE_VALUE, OCEAN_PROXIMITY ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+   postgres_insert_query = '''INSERT INTO houses(ID, LONGITUDE, LATITUDE, HOUSING_MEDIAN_AGE,TOTAL_ROOMS,TOTAL_BEDROOMS,POPULATION,HOUSEHOLDS,MEDIAN_INCOME,MEDIAN_HOUSE_VALUE, OCEAN_PROXIMITY ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
    
 
    f = open('housing.csv','r')
