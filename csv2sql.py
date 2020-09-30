@@ -16,22 +16,22 @@ try:
     record = cursor.fetchone()
     print("You are connected to - ", record,"\n")
 
-    create_table_query = '''CREATE TABLE houses
-          (ID INT PRIMARY KEY     NOT NULL,
-          LONGITUDE REAL    NOT NULL,
-          LATITUDE  REAL    NOT NULL,          
-          HOUSING_MEDIAN_AGE REAL    NOT NULL, 
-          TOTAL_ROOMS REAL, 
-          TOTAL_BEDROOMS REAL, 
-          POPULATION REAL    NOT NULL, 
-          HOUSEHOLDS REAL    NOT NULL, 
-          MEDIAN_INCOME REAL    NOT NULL, 
-          MEDIAN_HOUSE_VALUE REAL    NOT NULL, 
-          OCEAN_PROXIMITY TEXT    NOT NULL); '''
+    # create_table_query = '''CREATE TABLE houses
+    #       (ID INT PRIMARY KEY     NOT NULL,
+    #       LONGITUDE REAL    NOT NULL,
+    #       LATITUDE  REAL    NOT NULL,          
+    #       HOUSING_MEDIAN_AGE REAL    NOT NULL, 
+    #       TOTAL_ROOMS REAL, 
+    #       TOTAL_BEDROOMS REAL, 
+    #       POPULATION REAL    NOT NULL, 
+    #       HOUSEHOLDS REAL    NOT NULL, 
+    #       MEDIAN_INCOME REAL    NOT NULL, 
+    #       MEDIAN_HOUSE_VALUE REAL    NOT NULL, 
+    #       OCEAN_PROXIMITY TEXT    NOT NULL); '''
     
-    cursor.execute(create_table_query)
-    connection.commit()
-    print("Table created successfully in PostgreSQL ")
+    # cursor.execute(create_table_query)
+    # connection.commit()
+    # print("Table created successfully in PostgreSQL ")
     postgres_insert_query = '''INSERT INTO houses(ID, LONGITUDE, LATITUDE, HOUSING_MEDIAN_AGE,TOTAL_ROOMS,TOTAL_BEDROOMS,POPULATION,HOUSEHOLDS,MEDIAN_INCOME,MEDIAN_HOUSE_VALUE, OCEAN_PROXIMITY ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
 
     f = open('housing.csv','r')
