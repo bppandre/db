@@ -33,18 +33,23 @@ try:
     connection.commit()
     print("Table created successfully in PostgreSQL ")
 
-#    postgres_insert_query = """ INSERT INTO houses(
-#        ID, LONGITUDE, LATITUDE, HOUSING_MEDIAN_AGE,
-#        TOTAL_ROOMS,TOTAL_BEDROOMS,POPULATION,HOUSEHOLDS,MEDIAN_INCOME,
-#         MEDIAN_HOUSE_VALUE, OCEAN_PROXIMITY ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+   postgres_insert_query = """ INSERT INTO houses(
+       ID, LONGITUDE, LATITUDE, HOUSING_MEDIAN_AGE,
+       TOTAL_ROOMS,TOTAL_BEDROOMS,POPULATION,HOUSEHOLDS,MEDIAN_INCOME,
+        MEDIAN_HOUSE_VALUE, OCEAN_PROXIMITY ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
    
 
-#    record_to_insert = (5, 'One Plus 6', 950)
-#    cursor.execute(postgres_insert_query, record_to_insert)
-
-#    connection.commit()
-#    count = cursor.rowcount
-#    print (count, "Record inserted successfully into mobile table")
+   f = open('housing.csv','r')
+   row  = 0 
+   for line in f:
+       l = line.rstrip().split(',')
+       record_to_insert = (row, l[0],l[1],l[2],l[3],l[4],l[5],l[6],l[7],l[8],l[9],l[10])
+       row += 1
+       cursor.execute(postgres_insert_query, record_to_insert)
+   
+       connection.commit()
+       count = cursor.rowcount
+       print (count, "Record inserted successfully into mobile table")
 
 except (Exception, psycopg2.Error) as error :
     print ("Error while connecting to PostgreSQL", error)
@@ -55,7 +60,3 @@ finally:
             connection.close()
             print("PostgreSQL connection is closed")
 
-f = open('./housing.csv','r')
-for line in f:
-    l = l.rstrip().split('') 
-    print(l)
