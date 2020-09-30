@@ -15,6 +15,25 @@ try:
     record = cursor.fetchone()
     print("You are connected to - ", record,"\n")
 
+    create_table_query = '''CREATE TABLE houses
+          (ID INT PRIMARY KEY     NOT NULL,
+          LONGITUDE REAL    NOT NULL,
+          LATITUDE  REAL    NOT NULL,          
+          HOUSING_MEDIAN_AGE REAL    NOT NULL, 
+          TOTAL_ROOMS REAL, 
+          TOTAL_BEDROOMS REAL, 
+          POPULATION REAL    NOT NULL, 
+          HOUSEHOLDS REAL    NOT NULL, 
+          MEDIAN_INCOME REAL    NOT NULL, 
+          MEDIAN_HOUSE_VALUE REAL    NOT NULL, 
+          OCEAN_PROXIMITY TEXT    NOT NULL); '''
+    
+    cursor.execute(create_table_query)
+    connection.commit()
+    print("Table created successfully in PostgreSQL ")
+
+
+
 except (Exception, psycopg2.Error) as error :
     print ("Error while connecting to PostgreSQL", error)
 finally:
