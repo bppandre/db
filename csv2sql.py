@@ -1,3 +1,4 @@
+import csv
 import psycopg2
 try:
     connection = psycopg2.connect(user = "postgres",
@@ -32,7 +33,18 @@ try:
     connection.commit()
     print("Table created successfully in PostgreSQL ")
 
+#    postgres_insert_query = """ INSERT INTO houses(
+#        ID, LONGITUDE, LATITUDE, HOUSING_MEDIAN_AGE,
+#        TOTAL_ROOMS,TOTAL_BEDROOMS,POPULATION,HOUSEHOLDS,MEDIAN_INCOME,
+#         MEDIAN_HOUSE_VALUE, OCEAN_PROXIMITY ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+   
 
+#    record_to_insert = (5, 'One Plus 6', 950)
+#    cursor.execute(postgres_insert_query, record_to_insert)
+
+#    connection.commit()
+#    count = cursor.rowcount
+#    print (count, "Record inserted successfully into mobile table")
 
 except (Exception, psycopg2.Error) as error :
     print ("Error while connecting to PostgreSQL", error)
@@ -42,3 +54,8 @@ finally:
             cursor.close()
             connection.close()
             print("PostgreSQL connection is closed")
+
+f = open('./housing.csv','r')
+for line in f:
+    l = l.rstrip().split('') 
+    print(l)
