@@ -9,7 +9,7 @@ over_four = []
 try:
     connection = psycopg2.connect(user = "postgres",
                                   password = "postgres",
-                                  host = "35.192.30.56",
+                                  host = "104.198.71.239",
                                   port = "5432",
                                   database = "train")
 
