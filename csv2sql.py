@@ -33,18 +33,18 @@ try:
         header = next(csvreader)
         for row in csvreader:
             if int(row[0])<=4:
-                label = row[0]
-                pixels = ''.join(row[1:])
-                print(label,pixels)
-                cursor.execute(postgres_insert_query, (label, pixels))
-                print('inserted')
-
-
-            else:
                 pass
                 # label = row[0]
                 # pixels = ''.join(row[1:])
-                # cursor.execute("INSERT INTO test (label, pixels) VALUES (%s, %s)", (label, pixels))
+                # print(label,pixels)
+                # cursor.execute(postgres_insert_query, (label, pixels))
+                # print('inserted')
+
+            else:
+                label = row[0]
+                pixels = ''.join(row[1:])
+                cursor.execute(postgres_insert_query, (label, pixels))
+
 
     connection.commit()
 
