@@ -9,7 +9,7 @@ over_four = []
 try:
     connection = psycopg2.connect(user = "postgres",
                                   password = "postgres",
-                                  host = "35.192.30.56",
+                                  host = "localhost",
                                   port = "5432",
                                   database = "train")
 
@@ -28,7 +28,7 @@ try:
     postgres_insert_query = '''INSERT INTO train (label, pixels) VALUES (%s,%s)'''
 
     with open(filename,'r') as csvfile:
-        
+
         csvreader = csv.reader(csvfile)
         for row in csvreader:
             if int(row[0])<=4:
@@ -36,6 +36,7 @@ try:
                 pixels = ''.join(row[1:])
                 
                 cursor.execute("INSERT INTO test (label, pixels) VALUES (%s, %s)", (label, pixels))
+                print('inserted')
             else:
                 pass
                 # label = row[0]
