@@ -30,13 +30,16 @@ try:
     with open(filename,'r') as csvfile:
 
         csvreader = csv.reader(csvfile)
+        r_id = 0
         for row in csvreader:
             if int(row[0])<=4:
                 label = row[0]
                 pixels = ''.join(row[1:])
                 
-                cursor.execute("INSERT INTO test (label, pixels) VALUES (%s, %s)", (label, pixels))
+                cursor.execute("INSERT INTO test (id, label, pixels) VALUES (%s,%s, %s)", (r_id, label, pixels))
                 print('inserted')
+                r_id+=1
+                
             else:
                 pass
                 # label = row[0]
