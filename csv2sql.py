@@ -9,7 +9,7 @@ over_four = []
 try:
     connection = psycopg2.connect(user = "postgres",
                                   password = "postgres",
-                                  host = "104.198.71.239",
+                                  host = "35.192.30.56",
                                   port = "5432",
                                   database = "train")
 
@@ -33,17 +33,15 @@ try:
         header = next(csvreader)
         for row in csvreader:
             if int(row[0])<=4:
-                pass
-                # label = row[0]
-                # pixels = ''.join(row[1:])
-                # print(label,pixels)
-                # cursor.execute(postgres_insert_query, (label, pixels))
-                # print('inserted')
-
-            else:
                 label = row[0]
                 pixels = ''.join(row[1:])
                 cursor.execute(postgres_insert_query, (label, pixels))
+
+            else:
+                pass
+                # label = row[0]
+                # pixels = ''.join(row[1:])
+                # cursor.execute(postgres_insert_query, (label, pixels))
 
 
     connection.commit()
