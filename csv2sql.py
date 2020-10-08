@@ -1,11 +1,17 @@
 import csv
 import psycopg2
+
+filename = './traincopy.csv'
+
+under_four = []
+over_four = []
+
 try:
     connection = psycopg2.connect(user = "postgres",
                                   password = "postgres",
                                   host = "35.192.30.56",
                                   port = "5432",
-                                  database = "postgres")
+                                  database = "train")
 
     cursor = connection.cursor()
     # Print PostgreSQL Connection properties
@@ -16,19 +22,27 @@ try:
     record = cursor.fetchone()
     print("You are connected to - ", record,"\n")
 
-    # postgres_insert_query = '''INSERT INTO houses(ID, LONGITUDE, LATITUDE, HOUSING_MEDIAN_AGE,TOTAL_ROOMS,TOTAL_BEDROOMS,POPULATION,HOUSEHOLDS,MEDIAN_INCOME,MEDIAN_HOUSE_VALUE, OCEAN_PROXIMITY ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+    pg_create_table_query = "CREATE TABLE train (id serial PRIMARY KEY, label varchar, pixels varchar);"
+    cursor.execute(pg_create_table_query)
 
-    # f = open('housing.csv','r')
-    # row  = 0 
-    # for line in f:
-    #     l = line.rstrip().split(',')
-    #     record_to_insert = (row, l[0],l[1],l[2],l[3],l[4],l[5],l[6],l[7],l[8],l[9],l[10])
-    #     row += 1
-    #     cursor.execute(postgres_insert_query, record_to_insert)
+    postgres_insert_query = '''INSERT INTO train (label, pixels) VALUES (%s,%s)'''
 
-    #     connection.commit()
-    #     count = cursor.rowcount
-    #     print (count, "Record inserted successfully into mobile table")
+    with open(filename,'r') as csvfile:
+        
+        csvreader = csv.reader(csvfile)
+        for row in csvreader:
+            if int(row[0])<=4:
+                label = row[0]
+                pixels = ''.join(row[1:])
+                
+                cursor.execute("INSERT INTO test (label, pixels) VALUES (%s, %s)", (label, pixels))
+            else:
+                pass
+                # label = row[0]
+                # pixels = ''.join(row[1:])
+                # cursor.execute("INSERT INTO test (label, pixels) VALUES (%s, %s)", (label, pixels))
+
+    connection.commit()
 
 except (Exception, psycopg2.Error) as error :
     print ("Error while connecting to PostgreSQL", error)
