@@ -9,7 +9,7 @@ over_four = []
 try:
     connection = psycopg2.connect(user = "postgres",
                                   password = "postgres",
-                                  host = "localhost",
+                                  host = "35.192.30.56",
                                   port = "5432",
                                   database = "train")
 
@@ -30,6 +30,7 @@ try:
     with open(filename,'r') as csvfile:
 
         csvreader = csv.reader(csvfile)
+        header = next(csvreader)
         r_id = 0
         for row in csvreader:
             if int(row[0])<=4:
