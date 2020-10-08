@@ -31,15 +31,14 @@ try:
 
         csvreader = csv.reader(csvfile)
         header = next(csvreader)
-        r_id = 0
         for row in csvreader:
             if int(row[0])<=4:
                 label = row[0]
                 pixels = ''.join(row[1:])
                 print(label,pixels)
-                cursor.execute(postgres_insert_query, (r_id, label, pixels))
+                cursor.execute(postgres_insert_query, (label, pixels))
                 print('inserted')
-                r_id+=1
+
 
             else:
                 pass
