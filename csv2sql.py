@@ -25,7 +25,7 @@ try:
     pg_create_table_query = "CREATE TABLE train (id serial PRIMARY KEY, label varchar, pixels varchar);"
     cursor.execute(pg_create_table_query)
 
-    postgres_insert_query = '''INSERT INTO train (label, pixels) VALUES (%s,%s)'''
+    postgres_insert_query = "INSERT INTO train (label, pixels) VALUES (%s, %s)"
 
     with open(filename,'r') as csvfile:
 
@@ -35,11 +35,11 @@ try:
             if int(row[0])<=4:
                 label = row[0]
                 pixels = ''.join(row[1:])
-                
-                cursor.execute("INSERT INTO test (id, label, pixels) VALUES (%s,%s, %s)", (r_id, label, pixels))
+                print(label,pixels)
+                cursor.execute(postgres_insert_query, (r_id, label, pixels))
                 print('inserted')
                 r_id+=1
-                
+
             else:
                 pass
                 # label = row[0]
@@ -56,5 +56,3 @@ finally:
             cursor.close()
             connection.close()
             print("PostgreSQL connection is closed")
-
-
